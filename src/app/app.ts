@@ -8,7 +8,7 @@ import { ChartConfiguration } from 'chart.js';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, BaseChartDirective], // <- Injetado aqui
+  imports: [CommonModule, FormsModule, BaseChartDirective],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
@@ -21,9 +21,9 @@ export class App implements OnInit {
   editandoId: number | null = null; 
   registroEmEdicao: any = {};
 
-  // --- CONFIGURAÇÃO DO GRÁFICO ---
+  // COnfigurando o gráfico
   public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: [], // Aqui vão os nomes das usinas
+    labels: [], // nomes das usinas
     datasets: [
       { data: [], label: 'Energia Gerada (kWh)', backgroundColor: '#28a745', borderRadius: 4 }
     ]
@@ -41,7 +41,7 @@ export class App implements OnInit {
 
 carregarDados(): void {
  this.registroService.listarRegistros().subscribe((dados: any) => {
-   // Filtra quem é cliente (ou quem já estava no banco antes de criarmos o status)
+   // Filtra quem é cliente (ou quem já estava no banco antes de criar o status)
    this.clientesAtivos = dados.filter((r: any) => r.status === 'ATIVO' || !r.status);
    // Filtra quem veio do robô
    this.leadsPotenciais = dados.filter((r: any) => r.status === 'LEAD');
