@@ -1,0 +1,95 @@
+<div class="dashboard-container">
+  <h1>Dashboard Solar</h1>
+  
+  <div class="form-container">
+    <h3>Adicionar Nova Leitura</h3>
+    <div class="inputs-row">
+      <input type="text" placeholder="Nome da Usina" [(ngModel)]="novoRegistro.nomeUsina">
+      <input type="text" placeholder="Contato" [(ngModel)]="novoRegistro.numeroContato">
+      
+      <input type="number" placeholder="Energia (kWh)" [(ngModel)]="novoRegistro.energiaGeradaKwh">
+      <input type="date" [(ngModel)]="novoRegistro.dataRegistro">
+      <button class="btn-salvar" (click)="salvarNovaLeitura()">Salvar Registro</button>
+    </div>
+  </div>
+
+  <div class="chart-container" *ngIf="clientesAtivos.length > 0">
+    <canvas baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [type]="'bar'">
+    </canvas>
+  </div>
+
+  <h2>Monitoramento de Geração</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nº de Registro</th>
+        <th>Nome da Usina</th>
+        <th>Contato</th> <th>Energia (kWh)</th>
+        <th>Data da Medição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let registro of clientesAtivos; let i = index">
+        
+        <ng-container *ngIf="editandoId !== registro.id">
+          <td>{{ i + 1 }}</td>
+          <td>{{ registro.nomeUsina }}</td>
+          <td>{{ registro.numeroContato }}</td> <td>{{ registro.energiaGeradaKwh }}</td>
+          <td>{{ registro.dataRegistro }}</td>
+          <td>
+            <button class="btn-editar" (click)="iniciarEdicao(registro)">Editar</button>
+            <button class="btn-excluir" (click)="excluir(registro.id)">Excluir</button>
+          </td>
+        </ng-container>
+
+        <ng-container *ngIf="editandoId === registro.id">
+          <td>{{ registro.id }}</td>
+          <td><input type="text" [(ngModel)]="registroEmEdicao.nomeUsina" class="input-tabela"></td>
+          <td><input type="text" [(ngModel)]="registroEmEdicao.numeroContato" class="input-tabela"></td> <td><input type="number" [(ngModel)]="registroEmEdicao.energiaGeradaKwh" class="input-tabela"></td>
+          <td><input type="date" [(ngModel)]="registroEmEdicao.dataRegistro" class="input-tabela"></td>
+          <td>
+            <button class="btn-salvar btn-acao-linha" (click)="salvarEdicao()">Salvar</button>
+            <button class="btn-cancelar btn-acao-linha" (click)="cancelarEdicao()">Cancelar</button>
+          </td>
+        </ng-container>
+
+      </tr>
+    </tbody>
+  </table>
+  <hr class="divisor">
+
+  <h2>Potenciais Empresas (Leads)</h2>
+  
+  <div class="form-container">
+    <div class="inputs-row">
+      <input type="text" placeholder="Digite o CNPJ alvo..." [(ngModel)]="cnpjBusca">
+      <button class="btn-salvar" style="background-color: #ff9800;" (click)="buscarCnpj()">🔍 Prospectar Empresa</button>
+    </div>
+  </div>
+
+  <table *ngIf="leadsPotenciais.length > 0">
+    <thead>
+      <tr>
+        <th>Nº</th>
+        <th>Razão Social</th>
+        <th>Contato</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lead of leadsPotenciais; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ lead.nomeUsina }}</td>
+        <td>{{ lead.numeroContato }}</td>
+        <td>
+          <button class="btn-salvar" (click)="converterParaCliente(lead)">✅ Virou Cliente!</button>
+          <button class="btn-excluir" (click)="excluir(lead.id)">Descartar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
