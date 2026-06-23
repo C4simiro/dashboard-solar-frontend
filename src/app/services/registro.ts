@@ -30,8 +30,7 @@ export class RegistroService {
   }
 
   capturarLeadCnpj(cnpj: string): Observable<any> {
-    // Mandamos um POST. O corpo {} vai vazio porque a informação 
-    // principal (o CNPJ) já está viajando na própria URL.
+    // Mandando um POST. O corpo {} vai vazio porque a informação principal (o CNPJ) já está viajando na própria URL.
     return this.http.post(`${this.apiUrl}/cnpj/${cnpj}`, {});
   }
 }
