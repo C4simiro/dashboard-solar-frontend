@@ -1,59 +1,20 @@
-# DashboardSolar
+Dashboard Solar - Monitoramento e Exploração de novos clientes
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.3.
+O obejtivo principal do projeto foi criar algo que me pudesse relembrar conceitos das tecnologias citadas abaixo e me preparar para o mercado de trabalho. Ao mesmo tempo pensei em criar algo simples, mas que pudesse gerar algum valor futuramente.
 
-## Development server
+Uma aplicação Full-Stack desenvolvida para o monitoramento de geração de energia solar e prospecção ativa de clientes no setor de energias renováveis.
 
-To start a local development server, run:
+Arquitetura e Tecnologias
 
-```bash
-ng serve
-```
+Este projeto foi construído seguindo os padrões de separação de responsabilidades (Clean Code / SOLID) e arquitetura MVC, dividindo a aplicação em dois ecossistemas independentes:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Front-end (Single Page Application) Angular: Construção de componentes standalone, formulários reativos e consumo de APIs via HttpClient. TypeScript & HTML/CSS: Tipagem estática para manipulação segura de dados e interface responsiva. Chart.js (ng2-charts): Renderização de gráficos dinâmicos e em tempo real para o dashboard analítico.
 
-## Code scaffolding
+Back-end (API RESTful) Java & Spring Boot: Criação de rotas HTTP mapeadas (@RestController, @GetMapping, @PostMapping), injeção de dependências e servidor Apache Tomcat embutido. PostgreSQL: Banco de dados relacional em produção para persistência definitiva dos registros. JPA / Hibernate: Mapeamento Objeto-Relacional (ORM) para gerenciamento automático de tabelas e queries de forma segura.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Funcionalidades Principais
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Dashboard Analítico: Monitoramento visual da energia gerada (kWh) por cada usina através de gráficos de barras reativos.
+CRUD Completo: Criação, leitura, atualização (edição inline) e exclusão de clientes da base de dados.
+Motor de Prospecção (Integração de Sistemas): Automação construída no back-end utilizando RestTemplate para consumir a BrasilAPI. O sistema busca CNPJs em tempo real, extrai a Razão Social e o Contato, e salva automaticamente como um "Lead Potencial".
+Funil de Vendas: Conversão de "Leads" em "Clientes Ativos" com alteração de status direto no banco de dados e atualização imediata do painel de monitoramento.
